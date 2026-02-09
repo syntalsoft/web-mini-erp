@@ -1,17 +1,12 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { authGuard } from './core/auth/auth.guard';
-import { permissionGuard } from './core/auth/permission.guard';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component'),
+    loadComponent: () =>
+      import('./pages/login/login.component').then(m => m.default),
   },
   {
     path: '',
@@ -20,24 +15,24 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./pages/dashboard/dashboard.component'),
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(m => m.default),
       },
-      // MODULE 1 : Catalogue (ajouté plus tard)
-      // { path: 'catalogue', loadChildren: () => ... },
-
-      // MODULE 2 : Prospection (ajouté plus tard)
-      // { path: 'prospection', loadChildren: () => ... },
-
-      // MODULE 3 : Ventes (ajouté plus tard)
-      // { path: 'ventes', loadChildren: () => ... },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
     ],
   },
   {
     path: 'forbidden',
-    loadComponent: () => import('./pages/forbidden/forbidden.component'),
+    loadComponent: () =>
+      import('./pages/forbidden/forbidden.component').then(m => m.default),
   },
   {
     path: '**',
-    loadComponent: () => import('./pages/not-found/not-found.component'),
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(m => m.default),
   },
 ];

@@ -1,0 +1,63 @@
+// ============================================
+// Mini ERP - Global Styles
+// ============================================
+
+@use 'styles/variables' as *;
+@use 'styles/material-theme';
+@use 'styles/mixins';
+
+// --- Reset & Base ---
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-body2;
+  color: $text-primary;
+  background-color: $grey-100;
+}
+
+// --- Scrollbar ---
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $grey-200;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grey-400;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    background: $grey-500;
+  }
+}
+
+// --- Utility Classes ---
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-success { color: $success; }
+.text-warning { color: $warning; }
+.text-danger { color: $warn; }
+.text-muted { color: $text-secondary; }
+
+.mt-1 { margin-top: $spacing-sm; }
+.mt-2 { margin-top: $spacing-md; }
+.mt-3 { margin-top: $spacing-lg; }
+.mb-1 { margin-bottom: $spacing-sm; }
+.mb-2 { margin-bottom: $spacing-md; }
+.mb-3 { margin-bottom: $spacing-lg; }
+
+.p-1 { padding: $spacing-sm; }
+.p-2 { padding: $spacing-md; }
+.p-3 { padding: $spacing-lg; }
+
+.w-100 { width: 100%; }
+
+.cursor-pointer { cursor: pointer; }

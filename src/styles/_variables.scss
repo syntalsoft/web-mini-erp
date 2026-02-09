@@ -1,0 +1,91 @@
+// ============================================
+// Mini ERP - Design System Variables
+// ============================================
+
+// --- Colors ---
+$primary: #1976D2;
+$accent: #FF4081;
+$warn: #F44336;
+$success: #4CAF50;
+$warning: #FF9800;
+$info: #2196F3;
+
+// --- Grey Scale ---
+$grey-50: #FAFAFA;
+$grey-100: #F5F5F5;
+$grey-200: #EEEEEE;
+$grey-300: #E0E0E0;
+$grey-400: #BDBDBD;
+$grey-500: #9E9E9E;
+$grey-600: #757575;
+$grey-700: #616161;
+$grey-800: #424242;
+$grey-900: #212121;
+
+// --- Text Colors ---
+$text-primary: rgba(0, 0, 0, 0.87);
+$text-secondary: rgba(0, 0, 0, 0.60);
+$text-disabled: rgba(0, 0, 0, 0.38);
+
+// --- Typography ---
+$font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+$font-family-mono: 'Roboto Mono', 'Courier New', monospace;
+
+$font-size-h1: 32px;
+$font-size-h2: 24px;
+$font-size-h3: 20px;
+$font-size-h4: 18px;
+
+$font-size-body1: 16px;
+$font-size-body2: 14px;
+$font-size-caption: 12px;
+$font-size-button: 14px;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// --- Spacing (8px-based) ---
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// --- Shadows (Material Design Elevation) ---
+$shadow-1: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+           0 1px 1px 0 rgba(0, 0, 0, 0.14),
+           0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
+$shadow-2: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+           0 2px 2px 0 rgba(0, 0, 0, 0.14),
+           0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+$shadow-4: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+           0 4px 5px 0 rgba(0, 0, 0, 0.14),
+           0 1px 10px 0 rgba(0, 0, 0, 0.12);
+
+$shadow-8: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+           0 8px 10px 1px rgba(0, 0, 0, 0.14),
+           0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+// --- Border Radius ---
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-pill: 24px;
+
+// --- Breakpoints ---
+$breakpoint-xs: 0;
+$breakpoint-sm: 600px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1280px;
+$breakpoint-xl: 1920px;
+
+// --- Layout ---
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 64px;
+$navbar-height: 64px;
+$footer-height: 48px;

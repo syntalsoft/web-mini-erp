@@ -1,0 +1,76 @@
+// ============================================
+// Mini ERP - SCSS Mixins
+// ============================================
+
+@use 'variables' as *;
+
+// --- Responsive Breakpoints ---
+@mixin xs {
+  @media (max-width: #{$breakpoint-sm - 1}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: $breakpoint-sm) and (max-width: #{$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $breakpoint-lg) and (max-width: #{$breakpoint-xl - 1}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+// --- Flexbox Helpers ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// --- Truncate Text ---
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// --- Card Style ---
+@mixin card {
+  background: #fff;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-2;
+  padding: $spacing-md;
+}

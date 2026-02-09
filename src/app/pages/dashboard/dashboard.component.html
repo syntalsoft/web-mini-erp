@@ -1,0 +1,20 @@
+<div class="dashboard">
+  <h2>
+    Bonjour{{ user?.prenom ? ', ' + user!.prenom : '' }} !
+  </h2>
+  <p class="subtitle">Voici un aperçu de votre activité</p>
+
+  <div class="kpi-grid">
+    @for (kpi of kpis; track kpi.label) {
+      <mat-card class="kpi-card">
+        <div class="kpi-icon" [style.background-color]="kpi.color + '1A'" [style.color]="kpi.color">
+          <mat-icon>{{ kpi.icon }}</mat-icon>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-value">{{ kpi.value }}</span>
+          <span class="kpi-label">{{ kpi.label }}</span>
+        </div>
+      </mat-card>
+    }
+  </div>
+</div>

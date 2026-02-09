@@ -1,0 +1,63 @@
+@use 'styles/variables' as *;
+
+.dashboard {
+  padding: $spacing-lg;
+
+  h2 {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-h2;
+    font-weight: $font-weight-medium;
+  }
+
+  .subtitle {
+    margin: 0 0 $spacing-lg;
+    color: $text-secondary;
+  }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $spacing-md;
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $spacing-lg;
+  gap: $spacing-md;
+  border-radius: $border-radius-md;
+}
+
+.kpi-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: $border-radius-md;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.kpi-info {
+  display: flex;
+  flex-direction: column;
+
+  .kpi-value {
+    font-size: $font-size-h2;
+    font-weight: $font-weight-bold;
+    line-height: 1.2;
+  }
+
+  .kpi-label {
+    font-size: $font-size-body2;
+    color: $text-secondary;
+  }
+}

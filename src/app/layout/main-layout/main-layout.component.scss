@@ -1,0 +1,26 @@
+@use 'styles/variables' as *;
+
+.layout-wrapper {
+  display: flex;
+  margin-top: $navbar-height;
+  height: calc(100vh - #{$navbar-height});
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: $sidebar-width;
+  transition: margin-left 0.3s ease;
+  overflow: hidden;
+
+  &.sidebar-collapsed {
+    margin-left: $sidebar-collapsed-width;
+  }
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  background-color: $grey-100;
+}

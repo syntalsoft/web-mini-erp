@@ -1,0 +1,23 @@
+<nav class="sidebar" [class.collapsed]="collapsed">
+  @for (group of navGroups; track group.title) {
+    @if (!collapsed) {
+      <div class="nav-group-title">{{ group.title }}</div>
+    }
+    <mat-nav-list>
+      @for (item of group.items; track item.route) {
+        <a
+          mat-list-item
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+          [title]="item.label"
+        >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          @if (!collapsed) {
+            <span matListItemTitle>{{ item.label }}</span>
+          }
+        </a>
+      }
+    </mat-nav-list>
+  }
+</nav>

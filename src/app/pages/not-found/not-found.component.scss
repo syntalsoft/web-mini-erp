@@ -1,0 +1,36 @@
+@use 'styles/variables' as *;
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: $spacing-lg;
+
+  .error-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    color: $grey-400;
+    margin-bottom: $spacing-md;
+  }
+
+  h1 {
+    font-size: 72px;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-h3;
+    color: $text-secondary;
+    margin: $spacing-sm 0 $spacing-lg;
+  }
+
+  a mat-icon {
+    margin-right: $spacing-xs;
+  }
+}

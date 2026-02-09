@@ -1,0 +1,37 @@
+@use 'styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: $navbar-height;
+}
+
+.logo {
+  margin-left: $spacing-sm;
+  font-size: $font-size-h4;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.5px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-info {
+  padding: $spacing-md $spacing-md $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+
+  small {
+    color: $text-secondary;
+    font-size: $font-size-caption;
+  }
+}
+
+mat-divider {
+  margin: $spacing-xs 0;
+}

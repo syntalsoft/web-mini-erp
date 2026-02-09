@@ -61,3 +61,28 @@ body {
 .w-100 { width: 100%; }
 
 .cursor-pointer { cursor: pointer; }
+
+// --- Snackbar Variants ---
+.snackbar-success {
+  --mdc-snackbar-container-color: #{$success};
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #{$warn};
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}
+
+.snackbar-warning {
+  --mdc-snackbar-container-color: #{$warning};
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}
+
+.snackbar-info {
+  --mdc-snackbar-container-color: #{$info};
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}

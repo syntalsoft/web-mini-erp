@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { PackageService } from '../../services/package.service';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
 import { Package, PagedRequest } from '../../../../core/models';
 
 @Component({
@@ -44,7 +45,8 @@ export class PackageListComponent implements OnInit {
 
   constructor(
     private packageService: PackageService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmDialog: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -86,18 +88,20 @@ export class PackageListComponent implements OnInit {
     this.loadPackages();
   }
 
-  onDelete(id: string): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce package ?')) {
-      this.packageService.delete(id).subscribe({
-        next: () => {
-          this.notificationService.success('Package supprimé avec succès');
-          this.loadPackages();
-        },
-        error: () => {
-          this.notificationService.error('Erreur lors de la suppression du package');
-        }
-      });
-    }
+  onDelete(pkg: Package): void {
+    this.confirmDialog.confirmDelete('le package', pkg.designation).subscribe((confirmed) => {
+      if (confirmed) {
+        this.packageService.delete(pkg.id).subscribe({
+          next: () => {
+            this.notificationService.success('Package supprimé avec succès');
+            this.loadPackages();
+          },
+          error: () => {
+            this.notificationService.error('Erreur lors de la suppression du package');
+          }
+        });
+      }
+    });
   }
 
   formatPrice(price: number): string {

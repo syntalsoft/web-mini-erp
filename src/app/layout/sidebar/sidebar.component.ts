@@ -7,7 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 interface NavItem {
   label: string;
   icon: string;
-  route: string;
+  route?: string;
+  children?: NavItem[];
 }
 
 interface NavGroup {
@@ -35,7 +36,15 @@ export class SidebarComponent {
     {
       title: 'Commercial',
       items: [
-        { label: 'Catalogue', icon: 'inventory_2', route: '/catalogue' },
+        {
+          label: 'Catalogue',
+          icon: 'inventory_2',
+          children: [
+            { label: 'Produits', icon: 'inventory', route: '/catalogue/produits' },
+            { label: 'Services', icon: 'miscellaneous_services', route: '/catalogue/services' },
+            { label: 'Packages', icon: 'local_offer', route: '/catalogue/packages' },
+          ],
+        },
         { label: 'Prospection', icon: 'people_outline', route: '/prospection' },
         { label: 'Ventes', icon: 'point_of_sale', route: '/ventes' },
       ],

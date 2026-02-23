@@ -36,3 +36,26 @@ a.active {
     color: $primary;
   }
 }
+
+.menu-parent {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.submenu {
+  padding-left: 0 !important;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-left: 3px solid $primary;
+
+  .submenu-item {
+    padding-left: $spacing-lg !important;
+    font-size: $font-size-body2;
+
+    &.active {
+      background-color: rgba($primary, 0.12);
+    }
+  }
+}

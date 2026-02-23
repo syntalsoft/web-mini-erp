@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 
 import { ServiceCatalogueService } from '../../services/service.service';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
 import { Service, PagedRequest } from '../../../../core/models';
 
 @Component({
@@ -42,7 +43,8 @@ export class ServiceListComponent implements OnInit {
 
   constructor(
     private serviceService: ServiceCatalogueService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmDialog: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -84,18 +86,20 @@ export class ServiceListComponent implements OnInit {
     this.loadServices();
   }
 
-  onDelete(id: string): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
-      this.serviceService.delete(id).subscribe({
-        next: () => {
-          this.notificationService.success('Service supprimé avec succès');
-          this.loadServices();
-        },
-        error: () => {
-          this.notificationService.error('Erreur lors de la suppression du service');
-        }
-      });
-    }
+  onDelete(service: Service): void {
+    this.confirmDialog.confirmDelete('le service', service.designation).subscribe((confirmed) => {
+      if (confirmed) {
+        this.serviceService.delete(service.id).subscribe({
+          next: () => {
+            this.notificationService.success('Service supprimé avec succès');
+            this.loadServices();
+          },
+          error: () => {
+            this.notificationService.error('Erreur lors de la suppression du service');
+          }
+        });
+      }
+    });
   }
 
   formatPrice(price: number): string {

@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 
 import { ProduitService } from '../../services/produit.service';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
 import { Produit, PagedRequest } from '../../../../core/models';
 
 @Component({
@@ -42,7 +43,8 @@ export class ProduitListComponent implements OnInit {
 
   constructor(
     private produitService: ProduitService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmDialog: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -84,18 +86,20 @@ export class ProduitListComponent implements OnInit {
     this.loadProduits();
   }
 
-  onDelete(id: string): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-      this.produitService.delete(id).subscribe({
-        next: () => {
-          this.notificationService.success('Produit supprimé avec succès');
-          this.loadProduits();
-        },
-        error: () => {
-          this.notificationService.error('Erreur lors de la suppression du produit');
-        }
-      });
-    }
+  onDelete(produit: Produit): void {
+    this.confirmDialog.confirmDelete('le produit', produit.designation).subscribe((confirmed) => {
+      if (confirmed) {
+        this.produitService.delete(produit.id).subscribe({
+          next: () => {
+            this.notificationService.success('Produit supprimé avec succès');
+            this.loadProduits();
+          },
+          error: () => {
+            this.notificationService.error('Erreur lors de la suppression du produit');
+          }
+        });
+      }
+    });
   }
 
   formatPrice(price: number): string {

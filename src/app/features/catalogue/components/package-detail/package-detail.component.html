@@ -1,0 +1,137 @@
+<div class="detail-container" *ngIf="!loading && package">
+  <div class="detail-header">
+    <div class="header-title">
+      <button mat-icon-button (click)="onBack()" color="primary" title="Retour">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>{{ package.designation }}</h2>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+        Modifier
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+        Supprimer
+      </button>
+    </div>
+  </div>
+
+  <div class="detail-content">
+    <mat-card>
+      <mat-card-header>
+        <h3>Informations Générales</h3>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Référence :</span>
+            <span class="value">{{ package.reference }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Statut :</span>
+            <span class="value" [class.active]="package.estActif" [class.inactive]="!package.estActif">
+              {{ package.estActif ? 'Actif' : 'Inactif' }}
+            </span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div *ngIf="package.description" class="description">
+          <h4>Description</h4>
+          <p>{{ package.description }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <h3>Tarification</h3>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="pricing-grid">
+          <div class="pricing-item">
+            <span class="label">Prix Achat HT :</span>
+            <span class="value">{{ formatPrice(package.prixAchatHT) }}</span>
+          </div>
+          <div class="pricing-item">
+            <span class="label">Prix Vente HT :</span>
+            <span class="value">{{ formatPrice(package.prixVenteHT) }}</span>
+          </div>
+          <div class="pricing-item">
+            <span class="label">Taux TVA :</span>
+            <span class="value">{{ package.tauxTva }}%</span>
+          </div>
+          <div class="pricing-item">
+            <span class="label">Prix Vente TTC :</span>
+            <span class="value emphasis">{{ formatPrice(calculatePriceTTC(package.prixVenteHT, package.tauxTva)) }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="package.compositions && package.compositions.length > 0">
+      <mat-card-header>
+        <h3>Compositions ({{ package.compositions.length }} article(s))</h3>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="package.compositions">
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let element">{{ getCompositionName(element) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element">{{ getCompositionType(element) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantite">
+            <th mat-header-cell *matHeaderCellDef>Quantité</th>
+            <td mat-cell *matCellDef="let element">{{ element.quantite }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="compositionColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: compositionColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="!package.compositions || package.compositions.length === 0">
+      <mat-card-header>
+        <h3>Compositions</h3>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="empty-message">
+          <mat-icon>info</mat-icon>
+          Aucune composition définie pour ce package
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <h3>Informations Système</h3>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Date Création :</span>
+            <span class="value">{{ package.dateCreation | date:'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Dernière Modification :</span>
+            <span class="value">{{ package.dateModification | date:'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading-message">
+  <mat-icon>hourglass_empty</mat-icon>
+  <p>Chargement du package...</p>
+</div>

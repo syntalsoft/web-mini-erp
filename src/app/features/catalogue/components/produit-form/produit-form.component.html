@@ -1,0 +1,112 @@
+<div class="form-container" *ngIf="!loading">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Modifier le produit' : 'Nouveau produit' }}</h2>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-section">
+      <h3>Informations Générales</h3>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Désignation *</mat-label>
+          <input matInput formControlName="designation" placeholder="Ex: PC Portable Dell Latitude" maxlength="200" />
+          <mat-hint align="end">{{ form.get('designation')?.value?.length || 0 }} / 200</mat-hint>
+          <mat-error *ngIf="form.get('designation')?.hasError('required')">
+            La désignation est requise
+          </mat-error>
+          <mat-error *ngIf="form.get('designation')?.hasError('maxlength')">
+            Maximum 200 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Référence *</mat-label>
+          <input matInput formControlName="reference" placeholder="Ex: DELL-LAT-5420" maxlength="50" />
+          <mat-error *ngIf="form.get('reference')?.hasError('required')">
+            La référence est requise
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Catégorie *</mat-label>
+          <mat-select formControlName="categorieId">
+            <mat-option value="">-- Sélectionner une catégorie --</mat-option>
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">
+              {{ cat.libelle }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('categorieId')?.hasError('required')">
+            Veuillez sélectionner une catégorie
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="4" maxlength="2000"></textarea>
+        <mat-hint align="end">{{ form.get('description')?.value?.length || 0 }} / 2000</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-section">
+      <h3>Tarification</h3>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Prix Achat HT (FCFA) *</mat-label>
+          <input matInput type="number" formControlName="prixAchatHT" min="0" />
+          <mat-error *ngIf="form.get('prixAchatHT')?.hasError('required')">
+            Requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Prix Vente HT (FCFA) *</mat-label>
+          <input matInput type="number" formControlName="prixVenteHT" min="0" />
+          <mat-error *ngIf="form.get('prixVenteHT')?.hasError('required')">
+            Requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Taux TVA (%) *</mat-label>
+          <mat-select formControlName="tauxTva">
+            <mat-option value="0">0%</mat-option>
+            <mat-option value="18">18%</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Gestion du Stock</h3>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Stock Minimum *</mat-label>
+        <input matInput type="number" formControlName="stockMinimum" min="0" />
+        <mat-error *ngIf="form.get('stockMinimum')?.hasError('required')">
+          Requis
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-section">
+      <h3>Statut</h3>
+
+      <div class="checkbox-field">
+        <mat-checkbox formControlName="estActif">Produit actif</mat-checkbox>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()">
+        Annuler
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || submitting">
+        <mat-icon *ngIf="!submitting">save</mat-icon>
+        {{ submitting ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

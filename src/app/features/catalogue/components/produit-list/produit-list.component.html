@@ -1,0 +1,78 @@
+<div class="produit-list-container">
+  <div class="list-header">
+    <h2>Produits</h2>
+    <a routerLink="/catalogue/produits/new" mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Nouveau Produit
+    </a>
+  </div>
+
+  <div class="search-bar">
+    <mat-form-field class="search-field">
+      <mat-label>Rechercher</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-button (click)="onSearch()">Rechercher</button>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="produits" class="mat-elevation-z8">
+      <!-- Reference Column -->
+      <ng-container matColumnDef="reference">
+        <th mat-header-cell *matHeaderCellDef>Référence</th>
+        <td mat-cell *matCellDef="let element">{{ element.reference }}</td>
+      </ng-container>
+
+      <!-- Designation Column -->
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef>Désignation</th>
+        <td mat-cell *matCellDef="let element">{{ element.designation }}</td>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="categorie">
+        <th mat-header-cell *matHeaderCellDef>Catégorie</th>
+        <td mat-cell *matCellDef="let element">{{ element.categorie?.libelle || '-' }}</td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="prixVenteHT">
+        <th mat-header-cell *matHeaderCellDef>Prix Vente HT</th>
+        <td mat-cell *matCellDef="let element">{{ formatPrice(element.prixVenteHT) }}</td>
+      </ng-container>
+
+      <!-- Stock Minimum Column -->
+      <ng-container matColumnDef="stockMinimum">
+        <th mat-header-cell *matHeaderCellDef>Stock Min</th>
+        <td mat-cell *matCellDef="let element">{{ element.stockMinimum }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['/catalogue/produits', element.id]" color="primary" title="Voir">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button [routerLink]="['/catalogue/produits', element.id, 'edit']" color="primary" title="Modifier">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDelete(element.id)" color="warn" title="Supprimer">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10, 20, 50, 100]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

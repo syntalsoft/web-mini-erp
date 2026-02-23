@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { authGuard } from './core/auth/auth.guard';
+import { catalogueRoutes } from './features/catalogue/catalogue.routes';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component').then(m => m.default),
       },
+      ...catalogueRoutes,
       {
         path: '',
         redirectTo: 'dashboard',

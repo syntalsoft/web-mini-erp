@@ -1,0 +1,129 @@
+.categorie-detail-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .header-spacer {
+      flex: 1;
+    }
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+
+    p {
+      font-size: 16px;
+      color: #999;
+    }
+  }
+
+  .detail-content {
+    .detail-card {
+      margin-bottom: 20px;
+
+      mat-card-header {
+        margin-bottom: 16px;
+
+        mat-card-title {
+          margin: 0 0 8px 0;
+          font-size: 20px;
+        }
+
+        mat-card-subtitle {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+    }
+
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px 0;
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .info-label {
+          font-weight: 500;
+          color: #666;
+        }
+
+        .info-value {
+          text-align: right;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+
+    &.active {
+      background-color: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    &.inactive {
+      background-color: #ffccbc;
+      color: #d84315;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .categorie-detail-container {
+    padding: 12px;
+
+    .detail-header {
+      flex-wrap: wrap;
+
+      h2 {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+
+    .detail-content {
+      .info-section {
+        .info-row {
+          flex-direction: column;
+          gap: 8px;
+
+          .info-value {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

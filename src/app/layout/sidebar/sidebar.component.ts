@@ -40,6 +40,7 @@ export class SidebarComponent {
           label: 'Catalogue',
           icon: 'inventory_2',
           children: [
+            { label: 'Catégories', icon: 'category', route: '/catalogue/categories' },
             { label: 'Produits', icon: 'inventory', route: '/catalogue/produits' },
             { label: 'Services', icon: 'miscellaneous_services', route: '/catalogue/services' },
             { label: 'Packages', icon: 'local_offer', route: '/catalogue/packages' },

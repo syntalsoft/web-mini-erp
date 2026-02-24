@@ -1,0 +1,59 @@
+<div class="categorie-detail-container">
+  <div class="detail-header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Détail Catégorie</h2>
+    <div class="header-spacer"></div>
+    <button mat-icon-button [routerLink]="['/catalogue/categories', categorie?.id, 'edit']" color="primary" title="Modifier">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <p>Chargement...</p>
+  </div>
+
+  <div *ngIf="!loading && categorie" class="detail-content">
+    <mat-card class="detail-card">
+      <mat-card-header>
+        <mat-card-title>{{ categorie.libelle }}</mat-card-title>
+        <mat-card-subtitle>
+          <span class="status" [ngClass]="getStatusClass(categorie.estActif)">
+            {{ getStatusLabel(categorie.estActif) }}
+          </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <div class="info-section">
+          <div class="info-row">
+            <div class="info-label">Libellé</div>
+            <div class="info-value">{{ categorie.libelle }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Statut</div>
+            <div class="info-value">
+              <span class="status" [ngClass]="getStatusClass(categorie.estActif)">
+                {{ getStatusLabel(categorie.estActif) }}
+              </span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Date de Création</div>
+            <div class="info-value">{{ categorie.dateCreation | date: 'short' }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Date de Modification</div>
+            <div class="info-value">{{ categorie.dateModification | date: 'short' }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

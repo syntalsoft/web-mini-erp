@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiService } from '../../../core/api/api.service';
-import { Categorie } from '../../../core/models';
+import { Categorie, PagedRequest, PagedResult } from '../../../core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,24 @@ export class CategorieService {
   constructor(private apiService: ApiService) {}
 
   /**
-   * Get all categories (no pagination, for dropdowns)
+   * Get all categories with pagination
    */
-  getAll(): Observable<Categorie[]> {
+  getAll(request: PagedRequest): Observable<PagedResult<Categorie>>;
+  /**
+   * Get all categories without pagination (for dropdowns)
+   */
+  getAll(): Observable<Categorie[]>;
+  /**
+   * Get all categories - implementation
+   */
+  getAll(request?: PagedRequest): Observable<any> {
+    if (request) {
+      // With pagination
+      return this.apiService.getPaged<Categorie>(this.endpoint, request).pipe(
+        map(response => response.data)
+      );
+    }
+    // Without pagination (for dropdowns)
     return this.apiService.get<Categorie[]>(this.endpoint).pipe(
       map(response => response.data)
     );

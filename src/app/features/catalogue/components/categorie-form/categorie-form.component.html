@@ -1,0 +1,50 @@
+<div class="categorie-form-container">
+  <div class="form-header">
+    <button mat-icon-button (click)="cancel()" routerLink="/catalogue/categories">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ isEditMode ? 'Modifier Catégorie' : 'Nouvelle Catégorie' }}</h2>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-section">
+          <h3>Informations Générales</h3>
+
+          <mat-form-field class="full-width">
+            <mat-label>Libellé*</mat-label>
+            <input matInput formControlName="libelle" placeholder="Ex: Électronique, Logiciels..." />
+            <mat-error *ngIf="form.get('libelle')?.hasError('required')">
+              Le libellé est requis
+            </mat-error>
+            <mat-error *ngIf="form.get('libelle')?.hasError('maxlength')">
+              Le libellé ne doit pas dépasser 200 caractères
+            </mat-error>
+          </mat-form-field>
+
+          <mat-checkbox formControlName="estActif" class="full-width">
+            Catégorie active
+          </mat-checkbox>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            mat-stroked-button
+            (click)="cancel()"
+            [disabled]="submitting">
+            Annuler
+          </button>
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="form.invalid || submitting">
+            {{ submitting ? 'Enregistrement...' : 'Enregistrer' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

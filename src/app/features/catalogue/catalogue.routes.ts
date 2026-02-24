@@ -8,11 +8,31 @@ import { ServiceDetailComponent } from './components/service-detail/service-deta
 import { PackageListComponent } from './components/package-list/package-list.component';
 import { PackageFormComponent } from './components/package-form/package-form.component';
 import { PackageDetailComponent } from './components/package-detail/package-detail.component';
+import { CategorieListComponent } from './components/categorie-list/categorie-list.component';
+import { CategorieFormComponent } from './components/categorie-form/categorie-form.component';
+import { CategorieDetailComponent } from './components/categorie-detail/categorie-detail.component';
 
 export const catalogueRoutes: Routes = [
   {
     path: 'catalogue',
     children: [
+      // Catégories
+      {
+        path: 'categories',
+        component: CategorieListComponent
+      },
+      {
+        path: 'categories/new',
+        component: CategorieFormComponent
+      },
+      {
+        path: 'categories/:id',
+        component: CategorieDetailComponent
+      },
+      {
+        path: 'categories/:id/edit',
+        component: CategorieFormComponent
+      },
       // Produits
       {
         path: 'produits',
